@@ -11,7 +11,11 @@ from transaction.external_income_transaction import ExternalFreelanceIncome
 def main():
     print("Adding transactions...")
    
-    # TODO: Create balance and add observers
+    # Create balance and add observers
+    balance = Balance.get_instance()
+    balance.reset()
+    balance.register_observer(PrintObserver())
+    balance.register_observer(LowBalanceAlertObserver(threshold=100))
 
     # Create standard transactions
     transactions = [
