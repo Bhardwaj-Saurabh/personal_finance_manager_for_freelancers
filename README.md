@@ -27,17 +27,17 @@ python main.py
 
 ## Testing
 
-This project uses Python’s built-in unittest framework.
+This project uses pytest as the testing framework.
 
 To run all tests:
 
 ```
-python -m unittest discover
+python -m pytest balance/ transaction/ -v
 ```
 
 To run a single test file:
 ```
-python -m unittest balance/test_balance_observer.py
+python -m pytest balance/test_balance_observer.py -v
 ```
 
 ### Break Down Tests
@@ -60,7 +60,7 @@ python -m unittest balance/test_balance_observer.py
 ## Built With
 
 * [Python](https://www.python.org/) – Main programming language
-* [unittest](https://docs.python.org/3/library/unittest.html) – Testing framework
+* [pytest](https://docs.pytest.org/) – Testing framework
 * [PEP8](https://peps.python.org/pep-0008/) – Style guide for Python code
 
 ## License
