@@ -6,6 +6,7 @@ from transaction.transaction import Transaction
 from transaction.transaction_category import TransactionCategory
 from transaction.transaction_adapter import TransactionAdapter
 from transaction.external_income_transaction import ExternalFreelanceIncome
+from transaction.transaction_strategy import TaxStrategy, DiscountStrategy
 
 
 def main():
@@ -35,6 +36,18 @@ def main():
     # Apply all transactions to balance
     for txn in all_transactions:
         balance.apply_transaction(txn)
+
+    print(balance.summary())
+
+    # Apply transactions with Strategy pattern
+    print("\n--- Applying Strategy Pattern ---")
+    taxed_expense = Transaction(100, TransactionCategory.EXPENSE)
+    print(f"Applying {taxed_expense} with 15% tax...")
+    balance.apply_transaction(taxed_expense, strategy=TaxStrategy(rate=0.15))
+
+    discounted_expense = Transaction(200, TransactionCategory.EXPENSE)
+    print(f"Applying {discounted_expense} with 10% discount...")
+    balance.apply_transaction(discounted_expense, strategy=DiscountStrategy(rate=0.10))
 
     print(balance.summary())
 
