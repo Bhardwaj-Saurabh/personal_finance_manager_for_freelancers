@@ -43,17 +43,22 @@ class Balance:
         """Subtract expense from the balance."""
         self._balance -= amount
 
-    def apply_transaction(self, transaction):
+    def apply_transaction(self, transaction, strategy=None):
         """
         Apply a Transaction object to update the balance.
 
         Args:
             transaction (Transaction): The transaction to apply.
+            strategy (TransactionProcessingStrategy, optional): Strategy to process the amount.
         """
+        amount = transaction.amount
+        if strategy:
+            amount = strategy.apply(amount)
+
         if transaction.category == TransactionCategory.INCOME:
-            self.add_income(transaction.amount)
+            self.add_income(amount)
         elif transaction.category == TransactionCategory.EXPENSE:
-            self.add_expense(transaction.amount)
+            self.add_expense(amount)
         else:
             raise ValueError(f"Unknown transaction category: {transaction.category}")
         self._notify_observers(transaction)
