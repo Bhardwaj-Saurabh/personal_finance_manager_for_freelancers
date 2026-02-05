@@ -32,7 +32,11 @@ def main():
 
     all_transactions = transactions + [adapted_transaction]
 
-    # TODO: Apply all transactions to balance
+    # Apply all transactions to balance
+    for txn in all_transactions:
+        balance.apply_transaction(txn)
+
+    print(balance.summary())
 
 if __name__ == "__main__":
     main()
